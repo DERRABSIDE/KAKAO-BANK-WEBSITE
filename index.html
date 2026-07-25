@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KAKAO | Digital Banking</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --black:#030605;
+    --black2:#07100c;
+    --green:#063b29;
+    --green2:#075238;
+    --green3:#0a704b;
+    --light:#9df4c3;
+    --white:#f3faf6;
+    --gray:#879890;
+    --border:rgba(157,244,195,.13);
+}
+
+body{
+    background:var(--black);
+    color:var(--white);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:76px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:rgba(3,6,5,.94);
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:var(--light);
+}
+
+.navlinks{
+    display:flex;
+    gap:30px;
+    color:#aabbb3;
+    font-size:14px;
+}
+
+.navlinks a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.navlinks a:hover{
+    color:white;
+}
+
+.navbuttons{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    border:1px solid var(--border);
+    background:#0a120e;
+    color:white;
+    padding:12px 19px;
+    border-radius:14px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    border-color:rgba(157,244,195,.4);
+}
+
+.btn.green{
+    background:var(--green3);
+    border-color:transparent;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:650px;
+    padding:100px 6%;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:70px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    border:1px solid var(--border);
+    border-radius:50px;
+    padding:8px 14px;
+    color:var(--light);
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:clamp(48px,6vw,82px);
+    line-height:.95;
+    letter-spacing:-5px;
+    margin:24px 0;
+}
+
+.hero h1 span{
+    color:var(--light);
+}
+
+.hero p{
+    color:var(--gray);
+    font-size:18px;
+    line-height:1.7;
+    max-width:600px;
+}
+
+.hero-buttons{
+    margin-top:32px;
+    display:flex;
+    gap:12px;
+}
+
+/* ================= CARD ================= */
+
+.credit-card{
+    min-height:400px;
+    padding:35px;
+
+    border-radius:35px;
+
+    background:
+        radial-gradient(circle at 85% 15%,rgba(157,244,195,.13),transparent 25%),
+        linear-gradient(145deg,#0b4b34,#06120d 75%);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 40px 100px rgba(0,80,50,.18);
+}
+
+.cardtop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.chip{
+    width:50px;
+    height:36px;
+    background:#bcd6ca;
+    border-radius:8px;
+}
+
+.cardnumber{
+    margin-top:115px;
+    font-size:25px;
+    letter-spacing:4px;
+}
+
+.cardbottom{
+    margin-top:55px;
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:#bdd0c7;
+}
+
+/* ================= FEATURES ================= */
+
+.section{
+    padding:90px 6%;
+}
+
+.section h2{
+    font-size:42px;
+    letter-spacing:-2px;
+    margin-bottom:35px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:#07100c;
+    border:1px solid var(--border);
+    border-radius:27px;
+    padding:30px;
+}
+
+.feature-icon{
+    font-size:27px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:var(--gray);
+    line-height:1.6;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.82);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:100;
+}
+
+.modal{
+    width:min(440px,100%);
+    background:#08100c;
+    border:1px solid var(--border);
+    border-radius:30px;
+    padding:32px;
+    box-shadow:0 40px 120px black;
+}
+
+.modal h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.modal p{
+    color:var(--gray);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.close{
+    float:right;
+    border:0;
+    background:none;
+    color:#788b82;
+    font-size:27px;
+}
+
+.field{
+    margin-top:18px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    color:#a9bbb3;
+    margin-bottom:7px;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    background:#030705;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    outline:none;
+}
+
+.modalbuttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+.modalbuttons button{
+    flex:1;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    min-height:100vh;
+}
+
+.dashboardnav{
+    height:76px;
+    padding:0 4%;
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--green3);
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+}
+
+.dashboardbody{
+    max-width:1500px;
+    margin:auto;
+    padding:35px 4%;
+}
+
+.dashboardtop{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.dashboardtop h1{
+    font-size:38px;
+    letter-spacing:-2px;
+}
+
+.small{
+    color:var(--gray);
+    font-size:13px;
+    margin-top:7px;
+}
+
+.currencybox label{
+    display:block;
+    color:var(--gray);
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.currencybox select{
+    background:#08110c;
+    color:white;
+    border:1px solid var(--border);
+    padding:13px;
+    border-radius:14px;
+    min-width:250px;
+}
+
+/* ================= BALANCE ================= */
+
+.balance{
+    margin-top:25px;
+    padding:35px;
+
+    border-radius:32px;
+
+    background:
+        radial-gradient(circle at 90% 10%,rgba(157,244,195,.12),transparent 25%),
+        linear-gradient(135deg,#08462f,#062619);
+
+    border:1px solid var(--border);
+}
+
+.balance small{
+    color:#a8c4b7;
+}
+
+.amount{
+    font-size:clamp(45px,6vw,75px);
+    font-weight:900;
+    letter-spacing:-4px;
+    margin:8px 0;
+}
+
+.currencyname{
+    color:#b4cfc2;
+}
+
+/* ================= GRID ================= */
+
+.dashboardgrid{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:20px;
+}
+
+.panel{
+    background:#07100c;
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:27px;
+}
+
+.panel h3{
+    margin-bottom:22px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.action{
+    min-height:100px;
+    background:#0a1510;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    text-align:left;
+    color:white;
+}
+
+.action:hover{
+    background:#0e1e16;
+}
+
+.action strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.action span{
+    color:var(--gray);
+    font-size:12px;
+}
+
+/* ================= TRANSACTIONS ================= */
+
+.transaction{
+    display:flex;
+    justify-content:space-between;
+    padding:17px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.transaction:last-child{
+    border:0;
+}
+
+.transaction small{
+    color:var(--gray);
+}
+
+.positive{
+    color:var(--light);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    padding:45px 6%;
+    color:#65756e;
+    font-size:11px;
+    border-top:1px solid var(--border);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:70px 5%;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .dashboardgrid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .navbar{
+        padding:0 4%;
+    }
+}
+
+@media(max-width:500px){
+
+    .navbuttons .btn:first-child{
+        display:none;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .hero-buttons button{
+        width:100%;
+    }
+
+    .credit-card{
+        min-height:330px;
+    }
+
+    .cardnumber{
+        margin-top:80px;
+        font-size:18px;
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+    .currencybox,
+    .currencybox select{
+        width:100%;
+    }
+}
+
+.hidden{
+    display:none!important;
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     LANDING PAGE
+========================================================= -->
+
+<div id="landing">
+
+<nav class="navbar">
+
+    <div class="logo">
+        VERDANT<span>+</span>
+    </div>
+
+    <div class="navlinks">
+        <a href="#features">Banking</a>
+        <a href="#security">Security</a>
+        <a href="#about">About</a>
+    </div>
+
+    <div class="navbuttons">
+        <button class="btn" onclick="openAuth('login')">
+            Log in
+        </button>
+
+        <button class="btn green" onclick="openAuth('signup')">
+            Open account
+        </button>
+    </div>
+
+</nav>
+
+<section class="hero">
+
+<div>
+
+    <span class="badge">
+        PRIVATE DIGITAL BANKING
+    </span>
+
+    <h1>
+        Your money.<br>
+        Your <span>world.</span>
+    </h1>
+
+    <p>
+        A modern digital banking experience designed to
+        put your finances in one simple, secure place.
+    </p>
+
+    <div class="hero-buttons">
+
+        <button class="btn green"
+                onclick="openAuth('signup')">
+            Get started →
+        </button>
+
+        <button class="btn"
+                onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+            Explore
+        </button>
+
+    </div>
+
+</div>
+
+<div class="credit-card">
+
+    <div class="cardtop">
+
+        <strong>
+            KAKAO<span style="color:#9df4c3">
+        </strong>
+
+        <div class="chip"></div>
+
+    </div>
+
+    <div class="cardnumber">
+        •••• •••• •••• 4821
+    </div>
+
+    <div class="cardbottom">
+
+        <span>
+            KAKAO MEMBER
+        </span>
+
+        <span>
+            K / DIGITAL
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="section" id="features">
+
+<h2>
+    Banking without the clutter.
+</h2>
+
+<div class="features">
+
+<div class="feature">
+    <div class="feature-icon">◈</div>
+    <h3>One clear dashboard</h3>
+    <p>
+        See your balance, activity and account
+        information at a glance.
+    </p>
+</div>
+
+<div class="feature">
+    <div class="feature-icon">◎</div>
+    <h3>Global currencies</h3>
+    <p>
+        Switch between countries and see the
+        equivalent value of your balance.
+    </p>
+</div>
+
+<div class="feature" id="security">
+    <div class="feature-icon">◇</div>
+    <h3>Privacy focused</h3>
+    <p>
+        A banking interface
+        designed for a clean digital experience.
+    </p>
+</div>
+
+</div>
+
+</section>
+
+<footer id="about">
+    KAKAO is an online banking website.
+    It is a financial institution that processes
+    payments or transmit account credentials.
+</footer>
+
+</div>
+
+<!-- =========================================================
+     LOGIN / SIGNUP
+========================================================= -->
+
+<div id="authOverlay"
+     class="overlay hidden">
+
+<div class="modal">
+
+<button class="close"
+        onclick="closeAuth()">×</button>
+
+<h2 id="authTitle">
+    Welcome back
+</h2>
+
+<p id="authDescription">
+    Log in to your KAKAO account.
+</p>
+
+<form onsubmit="loginUser(event)">
+
+<div class="field">
+
+<label>
+    Email address
+</label>
+
+<input
+    id="email"
+    type="email"
+    placeholder="you@example.com"
+    required>
+
+</div>
+
+<div class="field">
+
+<label>
+    Password
+</label>
+
+<input
+    type="password"
+    placeholder="••••••••"
+    required>
+
+</div>
+
+<div class="modalbuttons">
+
+<button
+    type="button"
+    class="btn"
+    onclick="closeAuth()">
+    Cancel
+</button>
+
+<button
+    class="btn green"
+    id="authButton">
+    Log in
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div id="dashboard"
+     class="dashboard hidden">
+
+<nav class="dashboardnav">
+
+<div class="logo">
+    KAKAO
+</div>
+
+<div class="user">
+
+<div class="avatar"
+     id="avatar">
+    D
+</div>
+
+<button class="btn"
+        onclick="logout()">
+    Log out
+</button>
+
+</div>
+
+</nav>
+
+<main class="dashboardbody">
+
+<div class="dashboardtop">
+
+<div>
+
+<h1>
+    Good to see you.
+</h1>
+
+<div class="small">
+    Private banking overview
+</div>
+
+</div>
+
+<div class="currencybox">
+
+<label>
+    DISPLAY COUNTRY / CURRENCY
+</label>
+
+<select id="country"
+        onchange="changeCurrency()">
+</select>
+
+</div>
+
+</div>
+
+<!-- BALANCE -->
+
+<section class="balance">
+
+<small>
+    TOTAL AVAILABLE BALANCE
+</small>
+
+<div class="amount"
+     id="balance">
+    $1,000,000.00
+</div>
+
+<div class="currencyname"
+     id="currencyName">
+    United States Dollar · USD
+</div>
+
+</section>
+
+<!-- DASHBOARD PANELS -->
+
+<div class="dashboardgrid">
+
+<div class="panel">
+
+<h3>
+    Quick actions
+</h3>
+
+<div class="actions">
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    ↗ Send money
+</strong>
+
+<span>
+    Transfer funds
+</span>
+
+</button>
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    ↙ Receive money
+</strong>
+
+<span>
+    Request a payment
+</span>
+
+</button>
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    ▣ Cards
+</strong>
+
+<span>
+    Manage your cards
+</span>
+
+</button>
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    ◫ Statements
+</strong>
+
+<span>
+    View account statements
+</span>
+
+</button>
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    ⚙ Settings
+</strong>
+
+<span>
+    Account preferences
+</span>
+
+</button>
+
+<button class="action"
+        onclick="unavailable()">
+
+<strong>
+    🔔 Notifications
+</strong>
+
+<span>
+    Notification centre
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ACTIVITY -->
+
+<div class="panel">
+
+<h3>
+    Recent activity
+</h3>
+
+<div class="transaction">
+
+<div>
+<strong>
+    Account opening
+</strong>
+
+<br>
+
+<small>
+    Today
+</small>
+
+</div>
+
+<div class="positive">
+    +$1,000,000
+</div>
+
+</div>
+
+<div class="transaction">
+
+<div>
+<strong>
+    System check
+</strong>
+
+<br>
+
+<small>
+    Today
+</small>
+
+</div>
+
+<div>
+    Completed
+</div>
+
+</div>
+
+<div class="transaction">
+
+<div>
+<strong>
+    Card verification
+</strong>
+
+<br>
+
+<small>
+    Today
+</small>
+
+</div>
+
+<div>
+    —
+</div>
+
+</div>
+
+<div class="transaction">
+
+<div>
+<strong>
+    Account status
+</strong>
+
+<br>
+
+<small>
+    Current
+</small>
+
+</div>
+
+<div class="positive">
+    Active
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- =========================================================
+     UNAVAILABLE FEATURE POPUP
+========================================================= -->
+
+<div id="unavailable"
+     class="overlay hidden">
+
+<div class="modal"
+     style="text-align:center">
+
+<button class="close"
+        onclick="closeUnavailable()">
+    ×
+</button>
+
+<div style="font-size:45px;margin:10px">
+    ⚠️
+</div>
+
+<h2>
+    Feature unavailable
+</h2>
+
+<p style="margin-top:12px">
+
+WE ARE UNABLE TO ACCESS THIS FEATURE
+AT THIS TIME, TRY AGAIN LATER.
+
+</p>
+
+<button
+    class="btn green"
+    style="margin-top:25px;width:100%"
+    onclick="closeUnavailable()">
+
+    Understood
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   DEMO CURRENCY DATA
+========================================================= */
+
+const countries = {
+
+    US:{
+        name:"United States",
+        currency:"USD",
+        symbol:"$",
+        rate:1,
+        language:"English"
+    },
+
+    NG:{
+        name:"Nigeria",
+        currency:"NGN",
+        symbol:"₦",
+        rate:1525,
+        language:"English"
+    },
+
+    GB:{
+        name:"United Kingdom",
+        currency:"GBP",
+        symbol:"£",
+        rate:.79,
+        language:"English"
+    },
+
+    EU:{
+        name:"European Union",
+        currency:"EUR",
+        symbol:"€",
+        rate:.85,
+        language:"Multiple official languages"
+    },
+
+    JP:{
+        name:"Japan",
+        currency:"JPY",
+        symbol:"¥",
+        rate:158.2,
+        language:"Japanese"
+    },
+
+    CN:{
+        name:"China",
+        currency:"CNY",
+        symbol:"¥",
+        rate:7.18,
+        language:"Chinese"
+    },
+
+    KR:{
+        name:"South Korea",
+        currency:"KRW",
+        symbol:"₩",
+        rate:1470,
+        language:"Korean"
+    },
+
+    IN:{
+        name:"India",
+        currency:"INR",
+        symbol:"₹",
+        rate:86.4,
+        language:"Hindi / English"
+    },
+
+    GH:{
+        name:"Ghana",
+        currency:"GHS",
+        symbol:"GH₵",
+        rate:10.9,
+        language:"English"
+    },
+
+    ZA:{
+        name:"South Africa",
+        currency:"ZAR",
+        symbol:"R",
+        rate:17.8,
+        language:"Multiple official languages"
+    },
+
+    CA:{
+        name:"Canada",
+        currency:"CAD",
+        symbol:"C$",
+        rate:1.37,
+        language:"English / French"
+    },
+
+    AU:{
+        name:"Australia",
+        currency:"AUD",
+        symbol:"A$",
+        rate:1.53,
+        language:"English"
+    },
+
+    CH:{
+        name:"Switzerland",
+        currency:"CHF",
+        symbol:"CHF ",
+        rate:.80,
+        language:"German / French / Italian"
+    }
+
+};
+
+/* =========================================================
+   FIXED DEMO BALANCE
+========================================================= */
+
+const USD_BALANCE = 1000000;
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+function openAuth(mode){
+
+    document
+        .getElementById("authOverlay")
+        .classList.remove("hidden");
+
+    if(mode === "signup"){
+
+        document
+            .getElementById("authTitle")
+            .innerText="Create your account";
+
+        document
+            .getElementById("authDescription")
+            .innerText=
+            "Create a KAKAO demo account.";
+
+        document
+            .getElementById("authButton")
+            .innerText="Create account";
+
+    }else{
+
+        document
+            .getElementById("authTitle")
+            .innerText="Welcome back";
+
+        document
+            .getElementById("authDescription")
+            .innerText=
+            "Log in to your KAKAO demo account.";
+
+        document
+            .getElementById("authButton")
+            .innerText="Log in";
+    }
+}
+
+function closeAuth(){
+
+    document
+        .getElementById("authOverlay")
+        .classList.add("hidden");
+}
+
+function loginUser(event){
+
+    event.preventDefault();
+
+    const email =
+        document
+        .getElementById("email")
+        .value;
+
+    let name =
+        email
+        .split("@")[0]
+        .replace(/[._-]/g," ");
+
+    document
+        .getElementById("avatar")
+        .innerText =
+        name.charAt(0).toUpperCase();
+
+    closeAuth();
+
+    document
+        .getElementById("landing")
+        .classList.add("hidden");
+
+    document
+        .getElementById("dashboard")
+        .classList.remove("hidden");
+}
+
+function logout(){
+
+    document
+        .getElementById("dashboard")
+        .classList.add("hidden");
+
+    document
+        .getElementById("landing")
+        .classList.remove("hidden");
+}
+
+/* =========================================================
+   COUNTRY SELECTOR
+========================================================= */
+
+const countrySelect =
+    document.getElementById("country");
+
+for(const code in countries){
+
+    const c = countries[code];
+
+    const option =
+        document.createElement("option");
+
+    option.value = code;
+
+    option.textContent =
+        `${c.name} — ${c.currency}`;
+
+    countrySelect.appendChild(option);
+}
+
+function changeCurrency(){
+
+    const code =
+        countrySelect.value;
+
+    const c =
+        countries[code];
+
+    const converted =
+        USD_BALANCE * c.rate;
+
+    document
+        .getElementById("balance")
+        .innerText =
+        c.symbol +
+        converted.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+    document
+        .getElementById("currencyName")
+        .innerText =
+        `${c.name} · ${c.currency} · ${c.language}`;
+}
+
+/* =========================================================
+   UNAVAILABLE FEATURES
+========================================================= */
+
+function unavailable(){
+
+    document
+        .getElementById("unavailable")
+        .classList
+        .remove("hidden");
+}
+
+function closeUnavailable(){
+
+    document
+        .getElementById("unavailable")
+        .classList
+        .add("hidden");
+}
+
+</script>
+
+</body>
+</html>
